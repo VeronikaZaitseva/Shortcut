@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block  content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" name="sumbit" value="Обрезать">
+
+    </form>
+    <br><table width="100%" border="1">
+        <tr>
+            <td width="100">Первоначальная ссылка </td>
+            <td>Сокращенная ссылка </td>
+            <td>Дата добавления </td>
+            <td>Количество кликов   </td>
+        </tr>
+            {% for url in urls %}
+                <tr><td width="100">{{ url.real_url }}</td><td><a href="short/{{ url.code }}">http://short/{{ url.code }}</a></td><td>{{ url.created }}</td><td>{{ url.clicks }}</td></tr>
+            {% endfor %}
+
+    </table>
+{% endblock %}
